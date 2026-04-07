@@ -28,7 +28,7 @@ import java.awt.image.BufferStrategy;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private astro astro;
-        private asteroid asteroid;
+        private [asteroid] asteroid1;
         private alien alien;
 
 
