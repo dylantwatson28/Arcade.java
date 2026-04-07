@@ -23,6 +23,7 @@ import java.awt.image.BufferStrategy;
         public Image astroPic;
         public Image asteroidPic;
         public Image backgroundPic;
+        public Image alienPic;
 
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
@@ -57,9 +58,9 @@ import java.awt.image.BufferStrategy;
 
             //variable and objects
             //create (construct) the objects needed for the game and load up
-            astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png");//load the picture
-            asteroidPic = Toolkit.getDefaultToolkit().getImage("Astroid.jpg");
-            backgroundPic = Toolkit.getDefaultToolkit().getImage("star background.jpg");
+            astroPic = Toolkit.getDefaultToolkit().getImage("astroDude.png");//load the picture
+            asteroidPic = Toolkit.getDefaultToolkit().getImage("astroid.jpg");
+            backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
             astro = new astro(WIDTH / 2, HEIGHT / 2);
             asteroid = new asteroid(100, 100);
             asteroid.dx = -asteroid.dx;
