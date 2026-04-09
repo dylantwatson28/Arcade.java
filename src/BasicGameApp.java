@@ -28,7 +28,7 @@ import java.awt.image.BufferStrategy;
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
         private astro astro;
-        private [asteroid] asteroid1;
+        private asteroid[] asteroids;
         private alien alien;
 
 
@@ -62,12 +62,12 @@ import java.awt.image.BufferStrategy;
             asteroidPic = Toolkit.getDefaultToolkit().getImage("astroid.jpg");
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
             astro = new astro(WIDTH / 2, HEIGHT / 2);
-            asteroid = new asteroid(100, 100);
-            asteroid.dx = -asteroid.dx;
+            asteroids = new asteroid(100, 100);
+            asteroids.dx = -asteroids.dx;
 
-            asteroid = new asteroid[5];
-            for (int x = 0; x < asteroid.length; x++) {
-                asteroid[x] = new asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
+            asteroids = new asteroid[6];
+            for (int x = 0; x < asteroids.length; x++) {
+                asteroids[x] = new asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
 
             }
 
@@ -100,23 +100,23 @@ import java.awt.image.BufferStrategy;
             asteroid.move();
             alien.move();
             crashing();
-            for (int i = 0; i < asteroid.length; i++) {
+            for (int i = 0; i < asteroids.length; i++) {
                 asteroid[i].move();
             }
 
         }
 
         public void crashing() {
-            if (asteroid.hitbox.intersects(astroid2.hitbox) && asteroid.isCrashing == false) {
+            if (asteroids.hitbox.intersects(alien.hitbox) && asteroids.isCrashing == false) {
                 System.out.println("explode!");
                 asteroid.height += 50;
                 //astroid1.height = astroid1.height + 50; another option
-                asteroid.isCrashing = true;
-                asteroid.dy = -asteroid.dy;
-                //asteroid2.dy = -asteroid2.dy;
-                astro2.isAlive = false;
+                asteroids.isCrashing = true;
+                asteroids.dy = -asteroids.dy;
+                //asteroids.dy = -asteroids.dy;
+                alien.isAlive = false;
             }
-            if (asteroid.hitbox.intersects(astroid2.hitbox)) {
+            if (asteroids.hitbox.intersects(asteroids.hitbox)) {
                 System.out.println("no intersection");
             }
             for (int x = 0; x < astroids.length; x++) {
@@ -194,8 +194,8 @@ import java.awt.image.BufferStrategy;
             g.fillRect(alien.hitbox.x, alien.hitbox.y, alien.hitbox.width, alien.hitbox.height);
             g.dispose();
 
-            for (int z = 0; z < astroids.length; z++) {
-                g.drawImage(asteroidPic, asteroid[z].xpos, asteroid[z].ypos, asteroid[z].width, asteroid[z].height, null);
+            for (int z = 0; z < asteroids.length; z++) {
+                g.drawImage(asteroidPic, asteroids[z].xpos, asteroids[z].ypos, asteroids[z].width, asteroids[z].height, null);
             }
 
             bufferStrategy.show();
@@ -209,8 +209,8 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mousePressed(MouseEvent e) {
             System.out.println(e.getPoint());
-            asteroid.xpos = e.getX();
-            asteroid.ypos = e.getY();
+            asteroids.xpos = e.getX();
+            asteroids.ypos = e.getY();
         }
 
         @Override
