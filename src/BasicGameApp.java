@@ -64,10 +64,12 @@ import java.awt.image.BufferStrategy;
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
             astro = new astro(WIDTH / 2, HEIGHT / 2);
             asteroids = new asteroid[10];
-            for (int x = 0; x < asteroids.length;x++)
-            asteroids[x].move();
-            asteroid1.dx = -asteroid1.dx;
+            for (int x = 0; x < asteroids.length;x++){
+                asteroids[x] = new asteroid();
+                System.out.println();
 
+            }
+            asteroid1.dx = -asteroid1.dx;
             asteroids = new asteroid[6];
             for (int x = 0; x < asteroids.length; x++) {
                 asteroids[x] = new asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
