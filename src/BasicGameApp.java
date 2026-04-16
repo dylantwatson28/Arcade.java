@@ -30,6 +30,7 @@ import java.awt.image.BufferStrategy;
         private astro astro;
         private asteroid[] asteroids;
         private alien alien;
+        private asteroid asteroid1;
 
 
         // Main method definition
@@ -62,8 +63,10 @@ import java.awt.image.BufferStrategy;
             asteroidPic = Toolkit.getDefaultToolkit().getImage("astroid.jpg");
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
             astro = new astro(WIDTH / 2, HEIGHT / 2);
-            asteroids = new asteroid(100, 100);
-            asteroids.dx = -asteroids.dx;
+            asteroids = new asteroid[10];
+            for (int x = 0; x < asteroids.length;x++)
+            asteroids[x].move();
+            asteroid1.dx = -asteroid1.dx;
 
             asteroids = new asteroid[6];
             for (int x = 0; x < asteroids.length; x++) {
@@ -97,30 +100,30 @@ import java.awt.image.BufferStrategy;
         public void moveThings() {
             //calls the move( ) code in the objects
             astro.move();
-            asteroid.move();
+            asteroid1.move();
             alien.move();
             crashing();
             for (int i = 0; i < asteroids.length; i++) {
-                asteroid[i].move();
+                asteroids[i].move();
             }
 
         }
 
         public void crashing() {
-            if (asteroids.hitbox.intersects(alien.hitbox) && asteroids.isCrashing == false) {
+            if (asteroid1.hitbox.intersects(alien.hitbox) && asteroid1.isCrashing == false) {
                 System.out.println("explode!");
-                asteroid.height += 50;
+                asteroid1.height += 50;
                 //astroid1.height = astroid1.height + 50; another option
-                asteroids.isCrashing = true;
-                asteroids.dy = -asteroids.dy;
+                asteroid1.isCrashing = true;
+                asteroid1.dy = -asteroid1.dy;
                 //asteroids.dy = -asteroids.dy;
                 alien.isAlive = false;
             }
-            if (asteroids.hitbox.intersects(asteroids.hitbox)) {
+            if (asteroid1.hitbox.intersects(asteroid1.hitbox)) {
                 System.out.println("no intersection");
             }
-            for (int x = 0; x < astroids.length; x++) {
-                if (astroids[x].hitbox.intersects(astro.hitbox)) {
+            for (int x = 0; x < asteroids.length; x++) {
+                if (asteroids[x].hitbox.intersects(astro.hitbox)) {
                     System.out.println("astroid crash");
                     astro.isAlive = false;
                 }
@@ -185,12 +188,12 @@ import java.awt.image.BufferStrategy;
                 g.drawImage(astroPic, alien.xpos, alien.ypos, alien.width, alien.height, null);
             }
             //g.setColor(Color.GREEN);
-            g.drawImage(asteroidPic, asteroid.xpos, asteroid.ypos, asteroid.width, asteroid.height, null);
+            g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
             g.drawImage(alienPic, alien.xpos, alien.ypos, alien.width, alien.height, null);
             g.fillRect(100, 300, 200, 200);
             g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
             //g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
-            g.fillRect(asteroid.hitbox.x, asteroid.hitbox.y, asteroid.hitbox.width, asteroid.hitbox.height);
+            g.fillRect(asteroid1.hitbox.x, asteroid1.hitbox.y, asteroid1.hitbox.width, asteroid1.hitbox.height);
             g.fillRect(alien.hitbox.x, alien.hitbox.y, alien.hitbox.width, alien.hitbox.height);
             g.dispose();
 
@@ -209,8 +212,8 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mousePressed(MouseEvent e) {
             System.out.println(e.getPoint());
-            asteroids.xpos = e.getX();
-            asteroids.ypos = e.getY();
+            asteroid1.xpos = e.getX();
+            asteroid1.ypos = e.getY();
         }
 
         @Override
