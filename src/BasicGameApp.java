@@ -65,7 +65,7 @@ import java.awt.image.BufferStrategy;
             astro = new astro(WIDTH / 2, HEIGHT / 2);
             asteroids = new asteroid[10];
             for (int x = 0; x < asteroids.length;x++){
-                asteroids[x] = new asteroid();
+                asteroids[x] = new asteroid((int)(Math.random()*1000),(int)(Math.random()*650));
                 System.out.println();
 
             }
