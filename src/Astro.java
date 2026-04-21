@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class astro {
+public class Astro {
     public String name;
     public int xpos;
     public int ypos;
@@ -11,7 +11,7 @@ public class astro {
     public boolean isAlive;
     public Rectangle hitbox;
 
-    public astro(int pXpos, int pYpos){
+    public Astro(int pXpos, int pYpos){
         xpos = pXpos;
         ypos = pYpos;
         dx = 5;

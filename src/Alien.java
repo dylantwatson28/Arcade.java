@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class alien {
+public class Alien {
     public String name;
     public int xpos;
     public int ypos;
@@ -12,7 +12,7 @@ public class alien {
     public boolean isAlive;
     public boolean isCrashing;
 
-    public alien(int pXpos, int pYpos) {
+    public Alien(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx = 5;

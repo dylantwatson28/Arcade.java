@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class asteroid {
+public class Asteroid {
     public String name;
     public int xpos;
     public int ypos;
@@ -12,7 +12,7 @@ public class asteroid {
     public boolean isAlive;
     public boolean isCrashing;
 
-    public asteroid(int pXpos, int pYpos){
+    public Asteroid(int pXpos, int pYpos){
         xpos = pXpos;
         ypos = pYpos;
         dx = 5;
@@ -28,7 +28,7 @@ public class asteroid {
         if(xpos>=1000-width){
             xpos = 0;
         }
-        if(xpos<=0){
+        if(xpos<0){
             xpos=999-width;
         }
         if(ypos<=0){

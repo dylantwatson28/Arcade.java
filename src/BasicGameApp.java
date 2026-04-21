@@ -27,10 +27,10 @@ import java.awt.image.BufferStrategy;
 
         //Declare the objects used in the program
         //These are things that are made up of more than one variable type
-        private astro astro;
-        private asteroid[] asteroids;
-        private alien alien;
-        private asteroid asteroid1;
+        private Astro Astro;
+        private Asteroid[] asteroids;
+        private Alien Alien;
+        private Asteroid asteroid1;
 
 
         // Main method definition
@@ -59,22 +59,26 @@ import java.awt.image.BufferStrategy;
 
             //variable and objects
             //create (construct) the objects needed for the game and load up
-            astroPic = Toolkit.getDefaultToolkit().getImage("astroDude.png");//load the picture
-            asteroidPic = Toolkit.getDefaultToolkit().getImage("astroid.jpg");
+            astroPic = Toolkit.getDefaultToolkit().getImage("astroDude.jpg");//load the picture
+            asteroidPic = Toolkit.getDefaultToolkit().getImage("asteroid.jpg");
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
-            astro = new astro(WIDTH / 2, HEIGHT / 2);
-            asteroids = new asteroid[10];
+            alienPic = Toolkit.getDefaultToolkit().getImage("Alienship.jpeg");
+            Astro = new Astro(WIDTH / 2, HEIGHT / 2);
+            asteroids = new Asteroid[10];
             for (int x = 0; x < asteroids.length;x++){
-                asteroids[x] = new asteroid((int)(Math.random()*1000),(int)(Math.random()*650));
+                asteroids[x] = new Asteroid((int)(Math.random()*1000),(int)(Math.random()*650));
                 System.out.println();
 
             }
+            asteroid1 = new Asteroid(20,25);
             asteroid1.dx = -asteroid1.dx;
-            asteroids = new asteroid[6];
+            asteroids = new Asteroid[6];
             for (int x = 0; x < asteroids.length; x++) {
-                asteroids[x] = new asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
+                asteroids[x] = new Asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
 
             }
+            Alien = new Alien(10,10);
+
 
 
         }// BasicGameApp()
@@ -101,9 +105,9 @@ import java.awt.image.BufferStrategy;
 
         public void moveThings() {
             //calls the move( ) code in the objects
-            astro.move();
+            Astro.move();
             asteroid1.move();
-            alien.move();
+            Alien.move();
             crashing();
             for (int i = 0; i < asteroids.length; i++) {
                 asteroids[i].move();
@@ -112,22 +116,22 @@ import java.awt.image.BufferStrategy;
         }
 
         public void crashing() {
-            if (asteroid1.hitbox.intersects(alien.hitbox) && asteroid1.isCrashing == false) {
+            if (asteroid1.hitbox.intersects(Alien.hitbox) && asteroid1.isCrashing == false) {
                 System.out.println("explode!");
                 asteroid1.height += 50;
                 //astroid1.height = astroid1.height + 50; another option
                 asteroid1.isCrashing = true;
                 asteroid1.dy = -asteroid1.dy;
                 //asteroids.dy = -asteroids.dy;
-                alien.isAlive = false;
+                Alien.isAlive = false;
             }
             if (asteroid1.hitbox.intersects(asteroid1.hitbox)) {
                 System.out.println("no intersection");
             }
             for (int x = 0; x < asteroids.length; x++) {
-                if (asteroids[x].hitbox.intersects(astro.hitbox)) {
+                if (asteroids[x].hitbox.intersects(Astro.hitbox)) {
                     System.out.println("astroid crash");
-                    astro.isAlive = false;
+                    Astro.isAlive = false;
                 }
             }
         }
@@ -183,25 +187,26 @@ import java.awt.image.BufferStrategy;
 
             g.drawImage(backgroundPic, 0, 0, WIDTH, HEIGHT, null);
             //draw the image of the astronaut
-            if (astro.isAlive == true) {
-                g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+            if (Astro.isAlive == true) {
+                g.drawImage(astroPic, Astro.xpos, Astro.ypos, Astro.width, Astro.height, null);
             }
-            if (alien.isAlive == true) {
-                g.drawImage(astroPic, alien.xpos, alien.ypos, alien.width, alien.height, null);
+            if (Alien.isAlive == true) {
+                g.drawImage(astroPic, Alien.xpos, Alien.ypos, Alien.width, Alien.height, null);
+                g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
             }
             //g.setColor(Color.GREEN);
             g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
-            g.drawImage(alienPic, alien.xpos, alien.ypos, alien.width, alien.height, null);
-            g.fillRect(100, 300, 200, 200);
-            g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
+            g.drawImage(alienPic, Alien.xpos, Alien.ypos, Alien.width, Alien.height, null);
+            //g.drawRect(100, 300, 200, 200);
+           // g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
             //g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
-            g.fillRect(asteroid1.hitbox.x, asteroid1.hitbox.y, asteroid1.hitbox.width, asteroid1.hitbox.height);
-            g.fillRect(alien.hitbox.x, alien.hitbox.y, alien.hitbox.width, alien.hitbox.height);
-            g.dispose();
+            g.drawRect(asteroid1.hitbox.x, asteroid1.hitbox.y, asteroid1.hitbox.width, asteroid1.hitbox.height);
+            //g.drawRect(Alien.hitbox.x, Alien.hitbox.y, Alien.hitbox.width, Alien.hitbox.height);
 
             for (int z = 0; z < asteroids.length; z++) {
                 g.drawImage(asteroidPic, asteroids[z].xpos, asteroids[z].ypos, asteroids[z].width, asteroids[z].height, null);
             }
+            g.dispose();
 
             bufferStrategy.show();
         }
@@ -226,15 +231,15 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mouseEntered(MouseEvent e) {
             System.out.println("entered!!!");
-            astro.dx = 5;
-            astro.dy = 5;
+            Astro.dx = 5;
+            Astro.dy = 5;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             System.out.println("exited");
-            astro.dx = 5;
-            astro.dy = 5;
+            Astro.dx = 5;
+            Astro.dy = 5;
         }
 
         @Override
@@ -248,21 +253,21 @@ import java.awt.image.BufferStrategy;
 
             if (e.getKeyCode() == 38) {
                 System.out.println("Pressed up arrow");
-                astro.dy = -Math.abs(astro.dy);
-                astro.dy = -2;
+                Astro.dy = -Math.abs(Astro.dy);
+                Astro.dy = -2;
             }
             if (e.getKeyCode() == 40) {
                 System.out.println("pressed down arrow");
-                astro.dy = Math.abs(astro.dy);
-                astro.dy = 2;
+                Astro.dy = Math.abs(Astro.dy);
+                Astro.dy = 2;
             }
             if (e.getKeyCode() == 37) {
                 System.out.println("pressed left arrow");
-                astro.dx = -Math.abs(astro.dx);
+                Astro.dx = -Math.abs(Astro.dx);
             }
             if (e.getKeyCode() == 39) {
                 System.out.println("pressed right arrow");
-                astro.dx = Math.abs(astro.dx);
+                Astro.dx = Math.abs(Astro.dx);
             }
         }
 
@@ -270,13 +275,13 @@ import java.awt.image.BufferStrategy;
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == 38) {
                 System.out.println("pressed up arrow");
-                astro.dy = -Math.abs(astro.dy);
-                astro.dy = 0;
+                Astro.dy = -Math.abs(Astro.dy);
+                Astro.dy = 0;
             }
             if (e.getKeyCode() == 40) {
                 System.out.println("pressed down arrow");
-                astro.dy = -Math.abs(astro.dy);
-                astro.dy = 0;
+                Astro.dy = -Math.abs(Astro.dy);
+                Astro.dy = 0;
             }
         }
     }
