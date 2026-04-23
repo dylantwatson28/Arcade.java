@@ -11,18 +11,22 @@ public class Asteroid {
     public Rectangle hitbox;
     public boolean isAlive;
     public boolean isCrashing;
+    //vars
 
     public Asteroid(int pXpos, int pYpos){
         xpos = pXpos;
         ypos = pYpos;
-        dx = 5;
-        dy = 5;
+        dx = 1;
+        dy = 1;
+        //how fast
         width = 85;
         height = 85;
+        //size
         isAlive = false;
         isCrashing = false;
         hitbox = new Rectangle (xpos,ypos,width,height);
         //constructor
+        //setting vars
     }
     public void move(){
         if(xpos>=1000-width){
@@ -40,5 +44,6 @@ public class Asteroid {
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox = new Rectangle(xpos,ypos,width,height);
+        //how asteroid moves
     }
 }

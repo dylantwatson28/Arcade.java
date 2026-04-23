@@ -31,6 +31,7 @@ import java.awt.image.BufferStrategy;
         private Asteroid[] asteroids;
         private Alien Alien;
         private Asteroid asteroid1;
+        //variables
 
 
         // Main method definition
@@ -63,18 +64,23 @@ import java.awt.image.BufferStrategy;
             asteroidPic = Toolkit.getDefaultToolkit().getImage("asteroid.jpg");
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
             alienPic = Toolkit.getDefaultToolkit().getImage("Alienship.jpeg");
+            //setting images to their specific pic
             Astro = new Astro(WIDTH / 2, HEIGHT / 2);
-            asteroids = new Asteroid[10];
+            asteroids = new Asteroid[3];
+            //asteroid array to set how many asteroids I want
             for (int x = 0; x < asteroids.length;x++){
                 asteroids[x] = new Asteroid((int)(Math.random()*1000),(int)(Math.random()*650));
+                //for loop so array can run
                 System.out.println();
 
             }
             asteroid1 = new Asteroid(20,25);
             asteroid1.dx = -asteroid1.dx;
-            asteroids = new Asteroid[6];
+            asteroids = new Asteroid[4];
+            //another array
             for (int x = 0; x < asteroids.length; x++) {
                 asteroids[x] = new Asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
+                //another for loop for the second array to run
 
             }
             Alien = new Alien(10,10);
@@ -109,8 +115,10 @@ import java.awt.image.BufferStrategy;
             asteroid1.move();
             Alien.move();
             crashing();
+            //make methods run
             for (int i = 0; i < asteroids.length; i++) {
                 asteroids[i].move();
+                //make for loop run
             }
 
         }
@@ -126,7 +134,7 @@ import java.awt.image.BufferStrategy;
                 Alien.isAlive = false;
             }
             if (asteroid1.hitbox.intersects(asteroid1.hitbox)) {
-                System.out.println("no intersection");
+              //  System.out.println("no intersection");
             }
             for (int x = 0; x < asteroids.length; x++) {
                 if (asteroids[x].hitbox.intersects(Astro.hitbox)) {
@@ -157,8 +165,9 @@ import java.awt.image.BufferStrategy;
             // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
             // and trap input events (Mouse and Keyboard events)
             canvas = new Canvas();
-            // canvas.addKeyListener(this);
+             canvas.addKeyListener(this);
             canvas.addMouseListener(this);
+            //step 2 for key and mouse to work
             canvas.setBounds(0, 0, WIDTH, HEIGHT);
             canvas.setIgnoreRepaint(true);
 
@@ -273,15 +282,32 @@ import java.awt.image.BufferStrategy;
 
         @Override
         public void keyReleased(KeyEvent e) {
+            //step 3 for key and mouse
+            System.out.println("Key typed " + e.getKeyCode());
             if (e.getKeyCode() == 38) {
-                System.out.println("pressed up arrow");
+                //up arrow
+                System.out.println(" not pressed up arrow");
                 Astro.dy = -Math.abs(Astro.dy);
-                Astro.dy = 0;
+                //Astro.dy = 0;
             }
+            System.out.println("Key typed " + e.getKeyCode());
             if (e.getKeyCode() == 40) {
-                System.out.println("pressed down arrow");
-                Astro.dy = -Math.abs(Astro.dy);
-                Astro.dy = 0;
+                //down arrow
+                System.out.println(" not pressed down arrow");
+                Astro.dy = Math.abs(Astro.dy);
+                //Astro.dy = 0;
+            }
+            System.out.println("Key typed " + e.getKeyCode());
+            if (e.getKeyCode() == 39) {
+                //right arrow
+                System.out.println("pressed right arrow");
+                Astro.dx = Math.abs(Astro.dx);
+            }
+            System.out.println("Key typed " + e.getKeyCode());
+            if (e.getKeyCode() == 37) {
+                //left arrow key
+                System.out.println("pressed left arrow");
+                Astro.dx = -Math.abs(Astro.dx);
             }
         }
     }

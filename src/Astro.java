@@ -10,16 +10,20 @@ public class Astro {
     public int height;
     public boolean isAlive;
     public Rectangle hitbox;
+    //variables
 
     public Astro(int pXpos, int pYpos){
         xpos = pXpos;
         ypos = pYpos;
         dx = 5;
         dy = 5;
+        //how fast
         width = 60;
         height = 60;
+        //size
         isAlive = true;
         hitbox = new Rectangle(xpos,ypos,width,height);
+        //setting vars
     }
     public void move(){
         if(xpos>=1000 - width){
@@ -37,5 +41,6 @@ public class Astro {
         xpos=xpos+dx;
         ypos=ypos+dy;
         hitbox = new Rectangle(xpos,ypos,width,height);
+        //how astro moves
     }
 }
