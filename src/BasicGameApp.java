@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
     public class BasicGameApp implements Runnable, KeyListener, MouseListener {
+        //step one for key and mouse
 
         //Variable Definition Section
         //Declare the variables used in the program
@@ -30,7 +31,7 @@ import java.awt.image.BufferStrategy;
         private Astro Astro;
         private Asteroid[] asteroids;
         private Alien Alien;
-        private Asteroid asteroid1;
+        //private Asteroid asteroid1;
         //variables
 
 
@@ -60,10 +61,11 @@ import java.awt.image.BufferStrategy;
 
             //variable and objects
             //create (construct) the objects needed for the game and load up
-            astroPic = Toolkit.getDefaultToolkit().getImage("astroDude.jpg");//load the picture
+            astroPic = Toolkit.getDefaultToolkit().getImage("astroDude.jpg");
+            //load the picture //picture for specific character
             asteroidPic = Toolkit.getDefaultToolkit().getImage("asteroid.jpg");
             backgroundPic = Toolkit.getDefaultToolkit().getImage("spaceBackground.jpg");
-            alienPic = Toolkit.getDefaultToolkit().getImage("Alienship.jpeg");
+            alienPic = Toolkit.getDefaultToolkit().getImage("Alienship.jpg");
             //setting images to their specific pic
             Astro = new Astro(WIDTH / 2, HEIGHT / 2);
             asteroids = new Asteroid[3];
@@ -74,8 +76,8 @@ import java.awt.image.BufferStrategy;
                 System.out.println();
 
             }
-            asteroid1 = new Asteroid(20,25);
-            asteroid1.dx = -asteroid1.dx;
+            //asteroid1 = new Asteroid(20,25);
+            //asteroid1.dx = -asteroid1.dx;
             asteroids = new Asteroid[4];
             //another array
             for (int x = 0; x < asteroids.length; x++) {
@@ -112,7 +114,7 @@ import java.awt.image.BufferStrategy;
         public void moveThings() {
             //calls the move( ) code in the objects
             Astro.move();
-            asteroid1.move();
+            //asteroid1.move();
             Alien.move();
             crashing();
             //make methods run
@@ -124,22 +126,26 @@ import java.awt.image.BufferStrategy;
         }
 
         public void crashing() {
-            if (asteroid1.hitbox.intersects(Alien.hitbox) && asteroid1.isCrashing == false) {
+            if (Alien.hitbox.intersects(Astro.hitbox) && Alien.isCrashing == false) {
+                //if statement for alien intersecting with astro
                 System.out.println("explode!");
-                asteroid1.height += 50;
-                //astroid1.height = astroid1.height + 50; another option
-                asteroid1.isCrashing = true;
-                asteroid1.dy = -asteroid1.dy;
-                //asteroids.dy = -asteroids.dy;
-                Alien.isAlive = false;
+                Alien.height += 50;
+                Alien.height = Alien.height + 50;
+                //Alien expands when it interacts with astro
+                Alien.isCrashing = true;
+                Alien.dy = -Alien.dy;
+                Astro.dy = -Astro.dy;
+                Astro.isAlive = false;
+                //makes Astro due when intersects with Alien
             }
-            if (asteroid1.hitbox.intersects(asteroid1.hitbox)) {
+            //if (Alien.hitbox.intersects(Astro.hitbox)) {
               //  System.out.println("no intersection");
-            }
+            //}
             for (int x = 0; x < asteroids.length; x++) {
                 if (asteroids[x].hitbox.intersects(Astro.hitbox)) {
-                    System.out.println("astroid crash");
+                    System.out.println("asteroid crash");
                     Astro.isAlive = false;
+                    //astro also dies when it intersects with asteroids
                 }
             }
         }
@@ -204,12 +210,12 @@ import java.awt.image.BufferStrategy;
                 g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
             }
             //g.setColor(Color.GREEN);
-            g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
+          //  g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
             g.drawImage(alienPic, Alien.xpos, Alien.ypos, Alien.width, Alien.height, null);
             //g.drawRect(100, 300, 200, 200);
            // g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
             //g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
-            g.drawRect(asteroid1.hitbox.x, asteroid1.hitbox.y, asteroid1.hitbox.width, asteroid1.hitbox.height);
+           // g.drawRect(asteroid1.hitbox.x, asteroid1.hitbox.y, asteroid1.hitbox.width, asteroid1.hitbox.height);
             //g.drawRect(Alien.hitbox.x, Alien.hitbox.y, Alien.hitbox.width, Alien.hitbox.height);
 
             for (int z = 0; z < asteroids.length; z++) {
@@ -228,8 +234,8 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mousePressed(MouseEvent e) {
             System.out.println(e.getPoint());
-            asteroid1.xpos = e.getX();
-            asteroid1.ypos = e.getY();
+            Alien.xpos = e.getX();
+            Alien.ypos = e.getY();
         }
 
         @Override
