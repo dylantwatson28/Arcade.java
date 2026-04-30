@@ -32,7 +32,7 @@ import java.awt.image.BufferStrategy;
         private Asteroid[] asteroids;
         private Alien Alien;
         //private Asteroid asteroid1;
-        //variables
+        //variables to call in code
 
 
         // Main method definition
@@ -79,10 +79,10 @@ import java.awt.image.BufferStrategy;
             //asteroid1 = new Asteroid(20,25);
             //asteroid1.dx = -asteroid1.dx;
             asteroids = new Asteroid[4];
-            //another array
+            //another array for asteroids to print 4 asteroids
             for (int x = 0; x < asteroids.length; x++) {
                 asteroids[x] = new Asteroid((int) (Math.random() * 1000), (int) (Math.random() * 700));
-                //another for loop for the second array to run
+                //another for loop for the second array to work
 
             }
             Alien = new Alien(10,10);
@@ -120,23 +120,23 @@ import java.awt.image.BufferStrategy;
             //make methods run
             for (int i = 0; i < asteroids.length; i++) {
                 asteroids[i].move();
-                //make for loop run
+                //make for loop to make asteroids move
             }
 
         }
 
         public void crashing() {
             if (Alien.hitbox.intersects(Astro.hitbox) && Alien.isCrashing == false) {
-                //if statement for alien intersecting with astro
+                //if statement for alien intersecting with astro kills astro
                 System.out.println("explode!");
                 Alien.height += 50;
                 Alien.height = Alien.height + 50;
-                //Alien expands when it interacts with astro
+                //Alien expands in height when it interacts with astro
                 Alien.isCrashing = true;
                 Alien.dy = -Alien.dy;
                 Astro.dy = -Astro.dy;
                 Astro.isAlive = false;
-                //makes Astro due when intersects with Alien
+                //makes Astro die when intersects with Alien
             }
             //if (Alien.hitbox.intersects(Astro.hitbox)) {
               //  System.out.println("no intersection");
@@ -204,14 +204,17 @@ import java.awt.image.BufferStrategy;
             //draw the image of the astronaut
             if (Astro.isAlive == true) {
                 g.drawImage(astroPic, Astro.xpos, Astro.ypos, Astro.width, Astro.height, null);
+                //draw astro
             }
             if (Alien.isAlive == true) {
                 g.drawImage(astroPic, Alien.xpos, Alien.ypos, Alien.width, Alien.height, null);
                 g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
+                //draw astro hitbox
             }
             //g.setColor(Color.GREEN);
           //  g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
             g.drawImage(alienPic, Alien.xpos, Alien.ypos, Alien.width, Alien.height, null);
+            //draw alien
             //g.drawRect(100, 300, 200, 200);
            // g.drawRect(Astro.hitbox.x, Astro.hitbox.y, Astro.hitbox.width, Astro.hitbox.height);
             //g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
@@ -220,6 +223,7 @@ import java.awt.image.BufferStrategy;
 
             for (int z = 0; z < asteroids.length; z++) {
                 g.drawImage(asteroidPic, asteroids[z].xpos, asteroids[z].ypos, asteroids[z].width, asteroids[z].height, null);
+                //for loop draws asteroid
             }
             g.dispose();
 
@@ -236,6 +240,7 @@ import java.awt.image.BufferStrategy;
             System.out.println(e.getPoint());
             Alien.xpos = e.getX();
             Alien.ypos = e.getY();
+            //when I click with my mouse, the alien spawns there
         }
 
         @Override
@@ -246,6 +251,7 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mouseEntered(MouseEvent e) {
             System.out.println("entered!!!");
+            //prints entered when mouse enters the game
             Astro.dx = 5;
             Astro.dy = 5;
         }
@@ -253,6 +259,7 @@ import java.awt.image.BufferStrategy;
         @Override
         public void mouseExited(MouseEvent e) {
             System.out.println("exited");
+            //prints exited when mouse leaves the game
             Astro.dx = 5;
             Astro.dy = 5;
         }
@@ -267,20 +274,24 @@ import java.awt.image.BufferStrategy;
             System.out.println("Key typed" + e.getKeyCode());
 
             if (e.getKeyCode() == 38) {
+                //up arrow
                 System.out.println("Pressed up arrow");
                 Astro.dy = -Math.abs(Astro.dy);
                 Astro.dy = -2;
             }
             if (e.getKeyCode() == 40) {
+                //down arrow
                 System.out.println("pressed down arrow");
                 Astro.dy = Math.abs(Astro.dy);
                 Astro.dy = 2;
             }
             if (e.getKeyCode() == 37) {
+                //left arrow
                 System.out.println("pressed left arrow");
                 Astro.dx = -Math.abs(Astro.dx);
             }
             if (e.getKeyCode() == 39) {
+                //right arrow
                 System.out.println("pressed right arrow");
                 Astro.dx = Math.abs(Astro.dx);
             }
